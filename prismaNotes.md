@@ -188,6 +188,27 @@ const getUser = async () => {
 };
 
 ```
+### Applying OR operator to select records that match any of the Criteria
+
+```js
+import { PrismaClient } from "@prisma/client";
+const client = new PrismaClient();
+
+const getUser = async () => {
+  const users = await client.user.findMany({
+    where: {
+        OR: [
+            { follwers: { gt: 100} },
+            { age: {gt: 25} }
+        ]
+    },
+  });
+  console.log(users);
+};
+
+getUser();
+```
+
 ## CRUD Operations - Update
 ```js
 import { PrismaClient } from "@prisma/client";
